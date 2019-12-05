@@ -1,0 +1,23 @@
+.wall-comments{
+    margin-left: 30px;
+    margin-bottom: 0px;
+}
+.title-block h4, .title-block h6, .title-block a{
+    display: inline-block;
+}
+.title-block h6{
+    margin-left: 70%;
+    margin-right: 5px;
+}
+form .wall-comments{
+    margin-bottom: 20px;
+}
+.wall-comments .form-group{
+    margin-bottom: 5px;
+}
+.message-block h6{
+    margin-top: 15px;
+}
+.form-group{
+    margin-top: 25px;
+}

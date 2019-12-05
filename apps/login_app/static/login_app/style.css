@@ -1,0 +1,26 @@
+.container{
+    margin-top: 15px;
+}
+.registration, .login{
+    display: inline-block;
+    width: 45%;
+    align-content: center;
+    vertical-align: top;
+    margin: 0 10px;
+}
+
+label, input{
+    display: inline-block;
+}
+label{
+    width: 45%;
+}
+input{
+    width: 30%;
+}
+.return{
+    position: absolute;
+    top: 25px;
+    right: 15%;
+    color: #17A2B9;
+}

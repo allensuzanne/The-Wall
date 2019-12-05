@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Wall</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'wall_app/style.css' %}" />
+</head>
+
+<body>
+    <div class="container">
+        <div class="title-block">
+            <h4>The Wall</h4>
+            <h6>Welcome {{request.session.user}}</h6>
+            <a class="return" href="http://localhost:8000">Log Out</a>
+            <hr class="my-4" />
+        </div>
+        <form action="/wall/messages" method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+                <label>
+                    <h3>Post a Message</h3>
+                </label>
+                <textarea class="form-control" name="messages" value="" cols="30" rows="4"></textarea>
+            </div>
+            <button type="submit" class="btn btn-info">Post a message</button>
+        </form>
+        <div class="message-block">
+            {% for m in message_list%}
+            <h6>{{m.user.first_name}} {{m.user.last_name}} {{m.created_at}}</h6>
+            <p>{{m.message}}</p>
+            {% if m.user.id == request.session.user_id%} 
+            <form action="wall/destroy" method="POST">
+                {% csrf_token %}
+                <input type="hidden" name="destroyed_id" value="{{m.id}}" />
+                <button type="submit" class="btn btn-info">Delete</button>
+            </form>
+            {% endif %} 
+            {% for c in m.comments.all %}
+            <h6 class="wall-comments">
+                {{c.user.first_name}} {{c.user.last_name}} {{c.created_at}}
+            </h6>
+            <p class="wall-comments">{{c.comment}}</p>
+            {% endfor %}
+            <form class="wall-comments" action="/wall/comments" method="POST">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label>Post a Comment</label>
+                    <input type="hidden" name="message_id" value="{{m.id}}" />
+                    <textarea class="form-control" name="comments" value="" cols="30" rows="1"></textarea>
+                </div>
+                <button type="submit" class="btn btn-info">Post a comment</button>
+                <hr class="my-4" />
+            </form>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+
+</html>
