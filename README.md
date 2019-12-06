@@ -40,7 +40,7 @@ Validated user input incorporating errors with flash messages
 
 -Enter the command: python manage.py runserver
 
--View the project on http://localhost:8000/wall
+-View the project on http://localhost:8000
 
 -Exit the terminal once done with the command: ctrl-c
 
